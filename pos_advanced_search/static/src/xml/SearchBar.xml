@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="AdvancedSearch" t-inherit="point_of_sale.ProductsWidgetControlPanel" t-inherit-mode="extension"  owl="1">
+        <xpath expr="//input[@t-ref='search-word-input-product']" position="attributes">
+            <attribute name="t-on-keyup">autoCompletionSearch</attribute>
+            <!-- <attribute name="t-on-keydown">autoCompletionSearch</attribute> -->
+            <attribute name="t-on-change"></attribute>
+        </xpath>
+        <xpath expr="//div[@class='rightpane-header']" position="after">
+             <div class="o_dropdown" t-if="env.pos.config.enable_advanced_search_pos">
+                <div class="o_dropdown-menu" t-if="ShowProposition and listProductProposition and listCategProposition">
+                    <t t-foreach="listCategProposition" t-as="item" t-key="item.id">
+                        <a class="dropdown-item" t-att="item.id" href="#" t-on-click="()=>this._onclickItem(item, 'category')" >
+                            <i class="o_image_64_contain text-center pt16 fa fa-folder-o" style="font-size:34px;display: flex;justify-items: center;align-items: center;"/>
+                            <span><t t-esc="item.name"/></span>
+                        </a>  
+                    </t>   
+
+                    <t t-foreach="listProductProposition" t-as="item" t-key="item.id">
+                        <a class="dropdown-item" t-att="item.id" href="#" t-on-click="()=>this._onclickItem(item, 'product')">
+                            <img t-att-src="`/web/image/product.product/${item.id}/image_128`" t-att-alt="item.display_name" class="flex-shrink-0 o_image_64_contain"/>
+                            <div class="product-item">
+                                <div>
+                                    <b><t t-esc="item.display_name"/></b><br/>
+                                    <span style="font-size: 12px;">Category : <small class="text-muted"><t t-esc="item.pos_categ_id[1]"/></small></span>
+                                </div>
+                                <div>
+                                    <b class="text-nowrap"><t t-esc="price(item)"/></b>
+                                </div>
+                            </div>
+                        </a>  
+                    </t>              
+                </div>
+            </div>
+        </xpath>
+    </t>
+
+</templates>

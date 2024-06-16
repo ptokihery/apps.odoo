@@ -1,0 +1,15 @@
+<templates id="template" xml:space="preserve">
+
+    <t t-name="SwitchLang" owl="1">
+        <t t-if="env.pos.current_langs and env.pos.config.enable_switch_lang_pos">
+         <t t-set="langs" t-value="env.pos.current_langs or []"/>
+            <div class="select-container">
+                <i class="fa fa-language" aria-hidden="true"></i>
+                <select class="custom-select" t-on-change="switchLang" t-att-value="env.pos.setValueLang(langs)">
+                    <t t-foreach="langs" t-as="lang" t-key="lang.id">
+                        <option t-att-value="lang.id"><t t-esc="lang.display_name"/></option>
+                    </t>
+                </select> 
+            </div>
+        </t>
+    </t>

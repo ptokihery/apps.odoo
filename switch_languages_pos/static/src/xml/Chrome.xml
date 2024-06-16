@@ -1,0 +1,11 @@
+<templates id="template" xml:space="preserve">
+
+    <t t-name="Chrome" t-inherit="point_of_sale.Chrome" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[@class='pos-topheader']" position="attributes">
+            <attribute name="t-att-style">`background-color:${color}`</attribute>
+        </xpath>
+        <xpath expr="//TicketButton" position="before">
+            <SwitchLang langs="env.pos.langs"/>
+        </xpath>
+    </t>
+</templates>
